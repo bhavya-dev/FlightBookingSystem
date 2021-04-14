@@ -4,6 +4,8 @@ import java.math.BigInteger;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,16 +24,19 @@ public class PassengerController {
 	PassengerService passengerService;
 	
 	@PostMapping("/bookTicket")
-    public void bookTicket(@RequestBody Passenger passenger) {
+    public ResponseEntity<String> bookTicket(@RequestBody Passenger passenger) {
+		System.out.println(passenger);
 		passengerService.bookTicket(passenger);
+		return new ResponseEntity<>("Booking Success",HttpStatus.OK);
 	}
 
 
-//	@GetMapping("/bookHistory/{userId}")
-//	public List<Passenger> bookHistory(@PathVariable User userId){
-//		List<Passenger> passengers = passengerService.bookHistory(userId);
-//		return passengers;
-//	}
+	@GetMapping("/bookHistory/{userId}")
+	public List<Passenger> bookHistory(@PathVariable Integer userId){
+		System.out.println(userId);
+		List<Passenger> passengers = passengerService.bookHistory(userId);
+		return passengers;
+	}
 	
 	@DeleteMapping("/deleteBooking/{pnrNumber}")
 	public void deleteBooking(@PathVariable BigInteger pnrNumber) {

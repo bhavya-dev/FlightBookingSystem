@@ -2,6 +2,7 @@ package com.model;
 
 import java.math.BigInteger;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -22,8 +23,8 @@ public class Passenger {
 	private String passengerName;
 	private String phoneNumber;
 	
-	@OneToOne
-	@JoinColumn(name="flight_Number")
+	@ManyToOne
+	@JoinColumn(name="flight_number")
 	Flights flight;
 
 	@ManyToOne
@@ -70,8 +71,8 @@ public class Passenger {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public User getUser() {
-		return user;
+	public int getUser() {
+		return this.user.getUserId();
 	}
 
 	public void setUser(User user) {
@@ -79,8 +80,8 @@ public class Passenger {
 	}
 
 
-	public Flights getFlight() {
-		return flight;
+	public int getFlight() {
+		return this.flight.getFlightNumber();
 	}
 
 

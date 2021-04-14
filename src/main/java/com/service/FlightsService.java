@@ -27,9 +27,10 @@ public class FlightsService {
 		flightsRepository.save(flight);
 	}
 
-	public void deleteflight(Flights flight) {
+	public void deleteByFlightNumber(Integer flightNumber) {
 
-		flightsRepository.delete(flight);
+		flightsRepository.deleteByflight_number(flightNumber);
 	}
+
 
 }

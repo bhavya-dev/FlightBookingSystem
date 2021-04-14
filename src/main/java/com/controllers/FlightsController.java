@@ -38,8 +38,8 @@ public class FlightsController {
 		flightsService.update(flight);
 	}
 	
-	@DeleteMapping("/deleteFlight")
-	public void deleteFlight(@RequestBody Flights flight) {
-		flightsService.deleteflight(flight);
+	@DeleteMapping("/deleteByFlightNumber/{flightNumber}")
+	public void deleteFlight(@PathVariable Integer flightNumber) {
+		flightsService.deleteByFlightNumber(flightNumber);
 	}
 }

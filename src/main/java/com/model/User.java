@@ -2,8 +2,10 @@ package com.model;
 
 import java.util.ArrayList;
 
+
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,7 +23,7 @@ import org.hibernate.annotations.FetchMode;
 public class User {
 	
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Id
+	@Id 
 	private int userId;
 	@Column(unique=true)
 	private String userEmail;
@@ -29,14 +31,11 @@ public class User {
     private String name;
 	private String phoneNumber;
 	
-//	@OneToMany(mappedBy="user",fetch=FetchType.LAZY)
-//    @Fetch(value=FetchMode.SUBSELECT)
+//	@OneToMany(mappedBy="user",cascade=CascadeType.ALL)
 //	List<Flights> flights = new ArrayList<Flights>(); 
-//
-//	@OneToMany(mappedBy="user",fetch=FetchType.LAZY)
-//    @Fetch(value=FetchMode.SUBSELECT)
-//
-//	List<Passenger> passengers = new ArrayList<Passenger>(); 
+
+	@OneToMany(mappedBy="user",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+    List<Passenger> passengers = new ArrayList<Passenger>(); 
 	
 	public User() {
 		super();
@@ -52,8 +51,8 @@ public class User {
 		this.password = password;
 		this.name = name;
 		this.phoneNumber = phoneNumber;
-//		this.flights = flights;
-//		this.passengers = passengers;
+		//this.flights = flights;
+		this.passengers = passengers;
 	}
 
 
@@ -93,12 +92,12 @@ public class User {
 //	public void setFlights(List<Flights> flights) {
 //		this.flights = flights;
 //	}
-//	public List<Passenger> getPassengers() {
-//		return passengers;
-//	}
-//	public void setPassengers(List<Passenger> passengers) {
-//		this.passengers = passengers;
-//	}
+	public List<Passenger> getPassengers() {
+		return passengers;
+	}
+	public void setPassengers(List<Passenger> passengers) {
+		this.passengers = passengers;
+	}
 
 
 //	@Override
